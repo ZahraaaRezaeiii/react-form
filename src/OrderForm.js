@@ -17,6 +17,7 @@ import {
   Slider,
   Autocomplete,
   Chip,
+  Grid,
   Box,
 } from '@mui/material';
 
@@ -76,217 +77,211 @@ const OrderForm = () => {
         </Typography>
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="customerName"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Customer Name"
-                  variant="outlined"
-                  fullWidth
-                  error={!!errors.customerName}
-                  helperText={errors.customerName?.message}
-                  margin="normal"
-                  sx={{ mb: 2 }}
-                />
-              )}
-            />
-          </Box>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="customerName"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Customer Name"
+                    variant="outlined"
+                    fullWidth
+                    error={!!errors.customerName}
+                    helperText={errors.customerName?.message}
+                  />
+                )}
+              />
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Email"
-                  variant="outlined"
-                  fullWidth
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                  margin="normal"
-                  sx={{ mb: 2 }}
-                />
-              )}
-            />
-          </Box>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="email"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Email"
+                    variant="outlined"
+                    fullWidth
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
+                  />
+                )}
+              />
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="orderDate"
-              control={control}
-              render={({ field }) => (
-                <TextField
-                  {...field}
-                  label="Order Date"
-                  type="date"
-                  variant="outlined"
-                  fullWidth
-                  error={!!errors.orderDate}
-                  helperText={errors.orderDate?.message}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  sx={{ mb: 2 }}
-                />
-              )}
-            />
-          </Box>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="orderDate"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Order Date"
+                    type="date"
+                    variant="outlined"
+                    fullWidth
+                    error={!!errors.orderDate}
+                    helperText={errors.orderDate?.message}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  />
+                )}
+              />
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="product"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  fullWidth
-                  displayEmpty
-                  error={!!errors.product}
-                  sx={{ mb: 2 }}
-                >
-                  <MenuItem value="">Select Product</MenuItem>
-                  <MenuItem value="product1">Product 1</MenuItem>
-                  <MenuItem value="product2">Product 2</MenuItem>
-                  <MenuItem value="product3">Product 3</MenuItem>
-                </Select>
-              )}
-            />
-            {errors.product && <Typography color="error">{errors.product.message}</Typography>}
-          </Box>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="product"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    fullWidth
+                    displayEmpty
+                    error={!!errors.product}
+                  >
+                    <MenuItem value="">Select Product</MenuItem>
+                    <MenuItem value="product1">Product 1</MenuItem>
+                    <MenuItem value="product2">Product 2</MenuItem>
+                    <MenuItem value="product3">Product 3</MenuItem>
+                  </Select>
+                )}
+              />
+              {errors.product && <Typography color="error">{errors.product.message}</Typography>}
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="subscribe"
-              control={control}
-              render={({ field }) => (
-                <FormControlLabel
-                  control={<Checkbox {...field} />}
-                  label="I accept the terms and conditions"
-                />
-              )}
-            />
-            {errors.subscribe && <Typography color="error">{errors.subscribe.message}</Typography>}
-          </Box>
+            <Grid item xs={12}>
+              <Controller
+                name="subscribe"
+                control={control}
+                render={({ field }) => (
+                  <FormControlLabel
+                    control={<Checkbox {...field} />}
+                    label="I accept the terms and conditions"
+                  />
+                )}
+              />
+              {errors.subscribe && <Typography color="error">{errors.subscribe.message}</Typography>}
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="paymentMethod"
-              control={control}
-              render={({ field }) => (
-                <RadioGroup {...field} row>
-                  <FormControlLabel value="credit" control={<Radio />} label="Credit Card" />
-                  <FormControlLabel value="paypal" control={<Radio />} label="PayPal" />
-                  <FormControlLabel value="bitcoin" control={<Radio />} label="Bitcoin" />
-                </RadioGroup>
+            <Grid item xs={12}>
+              <Controller
+                name="paymentMethod"
+                control={control}
+                render={({ field }) => (
+                  <RadioGroup {...field} row>
+                    <FormControlLabel value="credit" control={<Radio />} label="Credit Card" />
+                    <FormControlLabel value="paypal" control={<Radio />} label="PayPal" />
+                    <FormControlLabel value="bitcoin" control={<Radio />} label="Bitcoin" />
+                  </RadioGroup>
+                )}
+              />
+              {errors.paymentMethod && (
+                <Typography color="error">{errors.paymentMethod.message}</Typography>
               )}
-            />
-            {errors.paymentMethod && (
-              <Typography color="error">{errors.paymentMethod.message}</Typography>
-            )}
-          </Box>
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="notifications"
-              control={control}
-              render={({ field }) => (
-                <FormControlLabel
-                  control={<Switch {...field} />}
-                  label="Receive Notifications"
-                />
+            <Grid item xs={12}>
+              <Controller
+                name="notifications"
+                control={control}
+                render={({ field }) => (
+                  <FormControlLabel
+                    control={<Switch {...field} />}
+                    label="Receive Notifications"
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Typography gutterBottom>Quantity</Typography>
+              <Controller
+                name="quantity"
+                control={control}
+                render={({ field }) => (
+                  <Slider
+                    {...field}
+                    defaultValue={1}
+                    min={1}
+                    max={100}
+                    step={1}
+                    marks
+                    valueLabelDisplay="auto"
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="tags"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    multiple
+                    fullWidth
+                    displayEmpty
+                    error={!!errors.tags}
+                    renderValue={(selected) =>
+                      selected.length === 0 ? 'Select Tags' : selected.join(', ')
+                    }
+                  >
+                    {tagOptions.map((tag) => (
+                      <MenuItem key={tag} value={tag}>
+                        <Checkbox checked={field.value.indexOf(tag) > -1} />
+                        {tag}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+              {errors.tags && <Typography color="error">{errors.tags.message}</Typography>}
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="selectedItems"
+                control={control}
+                render={({ field }) => (
+                  <Autocomplete
+                    {...field}
+                    multiple
+                    options={itemOptions}
+                    onChange={(event, value) => field.onChange(value)}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Select Items"
+                        variant="outlined"
+                        error={!!errors.selectedItems}
+                        helperText={errors.selectedItems?.message}
+                      />
+                    )}
+                    renderTags={(value, getTagProps) =>
+                      value.map((option, index) => (
+                        <Chip key={option} label={option} {...getTagProps({ index })} />
+                      ))
+                    }
+                  />
+                )}
+              />
+              {errors.selectedItems && (
+                <Typography color="error">{errors.selectedItems.message}</Typography>
               )}
-            />
-          </Box>
+            </Grid>
 
-          <Box sx={{ mb: 3 }}>
-            <Typography gutterBottom>Quantity</Typography>
-            <Controller
-              name="quantity"
-              control={control}
-              render={({ field }) => (
-                <Slider
-                  {...field}
-                  defaultValue={1}
-                  min={1}
-                  max={100}
-                  step={1}
-                  marks
-                  valueLabelDisplay="auto"
-                  sx={{ color: 'primary.main' }}
-                />
-              )}
-            />
-          </Box>
-
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="tags"
-              control={control}
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  multiple
-                  fullWidth
-                  displayEmpty
-                  error={!!errors.tags}
-                  sx={{ mb: 2 }}
-                  renderValue={(selected) =>
-                    selected.length === 0 ? 'Select Tags' : selected.join(', ')
-                  }
-                >
-                  {tagOptions.map((tag) => (
-                    <MenuItem key={tag} value={tag}>
-                      <Checkbox checked={field.value.indexOf(tag) > -1} />
-                      {tag}
-                    </MenuItem>
-                  ))}
-                </Select>
-              )}
-            />
-            {errors.tags && <Typography color="error">{errors.tags.message}</Typography>}
-          </Box>
-
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="selectedItems"
-              control={control}
-              render={({ field }) => (
-                <Autocomplete
-                  {...field}
-                  multiple
-                  options={itemOptions}
-                  onChange={(event, value) => field.onChange(value)}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Select Items"
-                      variant="outlined"
-                      error={!!errors.selectedItems}
-                      helperText={errors.selectedItems?.message}
-                    />
-                  )}
-                  renderTags={(value, getTagProps) =>
-                    value.map((option, index) => (
-                      <Chip key={option} label={option} {...getTagProps({ index })} />
-                    ))
-                  }
-                />
-              )}
-            />
-            {errors.selectedItems && (
-              <Typography color="error">{errors.selectedItems.message}</Typography>
-            )}
-          </Box>
-
-          <Box sx={{ textAlign: 'center', mt: 4 }}>
-            <Button type="submit" variant="contained" color="primary" size="large">
-              Submit
-            </Button>
-          </Box>
+            <Grid item xs={12} textAlign="center">
+              <Button type="submit" variant="contained" color="primary" size="large">
+                Submit
+              </Button>
+            </Grid>
+          </Grid>
         </form>
       </Box>
     </Container>
