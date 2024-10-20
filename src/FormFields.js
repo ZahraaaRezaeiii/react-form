@@ -19,9 +19,13 @@ import {
   Box,
 } from '@mui/material';
 
-export const FormFields = ({ control, errors, handleSubmit, onSubmit }) => {
+export const FormFields = ({ control, errors, handleSubmit }) => {
   const tagOptions = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4'];
   const itemOptions = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+
+  const onSubmit = (data) => {
+    console.log('Form Data:', data);
+    };
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>

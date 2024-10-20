@@ -37,12 +37,8 @@ export const FormProvider= () => {
         },
     });
 
-    const onSubmit = (data) => {
-        console.log('Form Data:', data);
-    };
-
     return (
-        <FormFields control={control} errors={errors} handleSubmit={handleSubmit} onSubmit={onSubmit}></FormFields>
+        <FormFields control={control} errors={errors} handleSubmit={handleSubmit} ></FormFields>
     );
 
 };
