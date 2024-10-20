@@ -19,7 +19,7 @@ import {
   Box,
 } from '@mui/material';
 
-export const FormFields = ({ control, errors, handleSubmit }) => {
+export const FormFields = ({ control, errors, handleSubmit, formWatch }) => {
   const tagOptions = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4'];
   const itemOptions = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
 
@@ -248,6 +248,20 @@ export const FormFields = ({ control, errors, handleSubmit }) => {
             </Grid>
           </Grid>
         </form>
+
+        <Typography variant="h6" gutterBottom align="center" sx={{ mt: 4 }}>
+          Form Values (Real-Time Watch):
+        </Typography>
+        <Typography variant="body1">Customer Name: {formWatch.customerName}</Typography>
+        <Typography variant="body1">Email: {formWatch.email}</Typography>
+        <Typography variant="body1">Order Date: {formWatch.orderDate}</Typography>
+        <Typography variant="body1">Product: {formWatch.product}</Typography>
+        <Typography variant="body1">Subscribe: {formWatch.subscribe ? 'Yes' : 'No'}</Typography>
+        <Typography variant="body1">Payment Method: {formWatch.paymentMethod}</Typography>
+        <Typography variant="body1">Notifications: {formWatch.notifications ? 'Yes' : 'No'}</Typography>
+        <Typography variant="body1">Quantity: {formWatch.quantity}</Typography>
+        <Typography variant="body1">Tags: {formWatch.tags.join(', ')}</Typography>
+        <Typography variant="body1">Selected Items: {formWatch.selectedItems.join(', ')}</Typography>
       </Box>
     </Container>
   );
