@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import {
   TextField,
@@ -17,15 +17,28 @@ import {
   Chip,
   Grid,
   Box,
+  Snackbar,
+  Alert
 } from '@mui/material';
 
-export const FormFields = ({ control, errors, handleSubmit, formWatch }) => {
+export const FormFields = ({ control, errors, handleSubmit, formWatch, reset }) => {
   const tagOptions = ['Tag 1', 'Tag 2', 'Tag 3', 'Tag 4'];
   const itemOptions = ['Item 1', 'Item 2', 'Item 3', 'Item 4'];
+  const [open, setOpen] = useState(false);
 
   const onSubmit = (data) => {
     console.log('Form Data:', data);
+    reset();
+    setOpen(true);
+    
     };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
@@ -125,7 +138,7 @@ export const FormFields = ({ control, errors, handleSubmit, formWatch }) => {
                 control={control}
                 render={({ field }) => (
                   <FormControlLabel
-                    control={<Checkbox {...field} />}
+                    control={<Checkbox {...field} checked={field.value} />}
                     label="I accept the terms and conditions"
                   />
                 )}
@@ -156,7 +169,7 @@ export const FormFields = ({ control, errors, handleSubmit, formWatch }) => {
                 control={control}
                 render={({ field }) => (
                   <FormControlLabel
-                    control={<Switch {...field} />}
+                    control={<Switch {...field} checked={field.value} />}
                     label="Receive Notifications"
                   />
                 )}
@@ -248,6 +261,12 @@ export const FormFields = ({ control, errors, handleSubmit, formWatch }) => {
             </Grid>
           </Grid>
         </form>
+
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        Form submitted successfully!   
+        </Alert>
+        </Snackbar>
 
         <Typography variant="h6" gutterBottom align="center" sx={{ mt: 4 }}>
           Form Values (Real-Time Watch):

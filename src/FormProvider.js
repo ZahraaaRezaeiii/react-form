@@ -21,6 +21,7 @@ export const FormProvider= () => {
         control,
         handleSubmit,
         watch,
+        reset,
         formState: { errors },
     } = useForm({
         resolver: yupResolver(validationSchema),
@@ -41,7 +42,7 @@ export const FormProvider= () => {
     const formWatch = watch();
 
     return (
-        <FormFields control={control} errors={errors} handleSubmit={handleSubmit} formWatch={formWatch} ></FormFields>
+        <FormFields control={control} errors={errors} handleSubmit={handleSubmit} formWatch={formWatch} reset={reset}></FormFields>
     );
 
 };
